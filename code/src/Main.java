@@ -7,7 +7,7 @@ public class Main {
 
         Geld g1 = new Geld();
         Geld g2 = new Geld();
-        Geld g3 = new Geld(15, "Koks", 1, 2);
+        Geld g3 = new Geld(15, "Mangos", 1, 2);
 
 
         System.out.println(g1.toString());
