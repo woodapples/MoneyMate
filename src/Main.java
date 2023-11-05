@@ -21,6 +21,7 @@ public class Main {
         DBController.writeToDatabase(g3);
         DBController.writeToDatabase(g4);
 
+
         DBController.closeConnection();
     }
 }
