@@ -1,13 +1,16 @@
 package dda;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.UUID;
 
 
 public class Geld {
     private final UUID id;
-    private final Instant erstellungsdatum;
+    private final LocalDate erstellungsDatum;
+    private final LocalTime erstellungsZeit;
     private double betrag;
     private String kommentar;
     private int bezahlmethode; // 0=Bar, 1=Karte, 2=Überweisung, 3=Lastschrift, 4=PayPal
@@ -21,7 +24,9 @@ public class Geld {
     }
     public Geld(double betrag, String kommentar, int bezahlmethode, int kategorieAusgabe) {
         this.id = UUID.randomUUID();
-        this.erstellungsdatum = Instant.now();
+        Instant aktuelleZeit = Instant.now();
+        this.erstellungsDatum = aktuelleZeit.atZone(zoneId).toLocalDate();
+        this.erstellungsZeit = aktuelleZeit.atZone(zoneId).toLocalTime();
         this.betrag = betrag;
         this.kommentar = kommentar;
         this.bezahlmethode = bezahlmethode;
@@ -47,8 +52,10 @@ public class Geld {
     public int getKategorieAusgabe() {
         return kategorieAusgabe;
     }
-    public Instant getErstellungsdatum() {
-        return erstellungsdatum;
+    public LocalDate getErstellungsDatum() {
+        return  erstellungsDatum;
+    } public LocalTime getErstellungsZeit() {
+        return erstellungsZeit;
     }
     public ZoneId getZoneId() {
         return zoneId;
@@ -75,7 +82,8 @@ public class Geld {
     @Override
     public String toString() {
         return "ID: " + getID() + "\nBetrag: " + getBetrag() + "\nKommentar: " + getKommentar() + "\nBezahlmethode: " +
-                getBezahlmethode() + "\nKategorie: " + getKategorieAusgabe() + "\nErstellungsdatum: " + getErstellungsdatum() + "\n";
+                getBezahlmethode() + "\nKategorie: " + getKategorieAusgabe() +
+                "\nErstellungsdatum: " + getErstellungsDatum() + "\nErstellungsuhrzeit: " + getErstellungsZeit() + "\n";
     }
 
 
